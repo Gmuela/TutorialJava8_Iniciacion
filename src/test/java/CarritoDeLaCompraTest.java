@@ -4,6 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CarritoDeLaCompraTest {
+    
+    private final Long TOTAL_SIZE = 20000000L;
+    private final Long NUMBER_ADD = 1000000L;
+    
 
     //@Test
     public void shouldReturnTheCountOfAllItems() throws Exception {
@@ -57,77 +61,80 @@ public class CarritoDeLaCompraTest {
 
     }
 
-    //@Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNull(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNull(){
 
-        CarritoBuilder builder = new CarritoBuilder(20L,100L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarError();
+        Assert.assertTrue(carritoDeLaCompra.detectarError());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullAnyMatch(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullAnyMatch(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorAnyMatch();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorAnyMatch());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullFindAny(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullFindAny(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
-        builder.addMultiple(20000000L,1000000L);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorFindAny();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindAny());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullFindFirst(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullFindFirst(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
-        builder.addMultiple(20000000L,1000000L);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorFindFirst();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindFirst());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullAnyMatchParallel(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullAnyMatchParallel(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorAnyMatchParallel();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorAnyMatchParallel());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullFindAnyParallel(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullFindAnyParallel(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
-        builder.addMultiple(20000000L,1000000L);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorFindAnyParallel();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindAnyParallel());
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldDetectErrorAnThrowRuntimeExceptionWhenAPriceIsNullFindFirstParallel(){
+    @Test
+    public void shouldDetectErrorAndReturnTrueWhenAPriceIsNullFindFirstParallel(){
 
-        CarritoBuilder builder = new CarritoBuilder(20000000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(TOTAL_SIZE,NUMBER_ADD);
         builder.add(null);
-        builder.addMultiple(20000000L,1000000L);
+        builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        carritoDeLaCompra.detectarErrorFindFirstParallel();
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindFirstParallel());
 
     }
 }

@@ -70,30 +70,37 @@ public class CarritoDeLaCompra<T extends Long> {
         return descuentoTotal;
     }
 
-    public void detectarError() {
+    public boolean detectarError() {
+
+        boolean nullFind = false;
 
         for (Long precio : precios) {
 
             if (precio == null) {
 
-                throw new RuntimeException("Precio erróneo detectado");
+                nullFind = true;
             }
         }
+
+        return nullFind;
     }
 
     public boolean detectarErrorAnyMatch() {
+
         return this.precios.stream().anyMatch(precio -> precio == null);
     }
 
+
+    //TODO Revisar nullPointerException
     public boolean detectarErrorFindAny() {
+
         return this.precios.stream()
                 .filter(precio -> precio == null)
                 .findAny()
                 .isPresent();
-
     }
 
-
+    //TODO Revisar nullPointerException
     public boolean detectarErrorFindFirst() {
 
         return this.precios.stream()

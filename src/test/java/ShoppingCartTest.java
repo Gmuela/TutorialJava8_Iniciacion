@@ -15,9 +15,9 @@ public class ShoppingCartTest {
 
     @BeforeClass
     public static void setUp() {
-        CarritoBuilder builder = new CarritoBuilder(1_000_000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(1000L,1000000L);
         builder.add(null);
-        builder.addMultiple(200_000L,1000000L);
+        builder.addMultiple(2000L,1000000L);
         shoppingCart = builder.build();
     }
 
