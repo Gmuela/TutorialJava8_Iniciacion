@@ -15,9 +15,9 @@ public class ShoppingCartTest {
 
     @BeforeClass
     public static void setUp() {
-        CarritoBuilder builder = new CarritoBuilder(1000L,1000000L);
+        CarritoBuilder builder = new CarritoBuilder(100_000L,1000000L);
         builder.add(null);
-        builder.addMultiple(2000L,1000000L);
+        builder.addMultiple(20_000L,1000000L);
         shoppingCart = builder.build();
     }
 
@@ -60,14 +60,13 @@ public class ShoppingCartTest {
 
     private long testWith(Supplier<Boolean> method) {
         Boolean []errors = new Boolean[UP_TO];
-        System.gc();
+       // System.gc();
         System.out.println("Start----------------------");
         long start  = System.currentTimeMillis();
         for (int i = 0; i < UP_TO; i++) {
             try {
                 errors[i] = method.get();
             } catch (Exception e) {
-                e.printStackTrace();
             }//won't happen
         }
         long end = System.currentTimeMillis();

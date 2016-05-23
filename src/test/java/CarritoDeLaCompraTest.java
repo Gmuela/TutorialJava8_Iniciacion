@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CarritoDeLaCompraTest {
     
-    private final Long TOTAL_SIZE = 20000000L;
+    private final Long TOTAL_SIZE = 20_000_000L;
     private final Long NUMBER_ADD = 1000000L;
     
 
