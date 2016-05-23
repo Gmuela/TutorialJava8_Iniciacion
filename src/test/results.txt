@@ -1,0 +1,31 @@
+//UP_TO = 10_000,  200k+200k - ArrayList
+
+findFirst = 14007
+findFirstParallel = 6615
+
+anyMatch = 5799
+anyMatchParallel = 4845
+
+findAny = 5819
+findAnyParallel = 10283
+
+//UP_TO = 10_000, 1.000k + 200k, - ArrayList
+anyMatch = 29584
+anyMatchParallel = 11267
+
+findAny = 31122
+findAnyParallel = 35922
+
+findFirst = 82346
+findFirstParallel = 16790
+
+//UP_TO = 10_000, 1.000k + 200k, - CopyOnWriteArrayList
+anyMatch = 20243
+anyMatchParallel = 9273
+
+findAny = 20109
+findAnyParallel = 25680
+
+findFirst = 69536
+findFirstParallel = 11485
+

@@ -81,48 +81,46 @@ public class CarritoDeLaCompra<T extends Long> {
         }
     }
 
-    public void detectarErrorAnyMatch() {
-
-        if (this.precios.stream().anyMatch(precio -> precio == null)) {
-
-            throw new RuntimeException("Precio erróneo detectado");
-        }
+    public boolean detectarErrorAnyMatch() {
+        return this.precios.stream().anyMatch(precio -> precio == null);
     }
 
-    public void detectarErrorFindAny() {
+    public boolean detectarErrorFindAny() {
+        return this.precios.stream()
+                .filter(precio -> precio == null)
+                .findAny()
+                .isPresent();
 
-        this.precios.stream().filter(precio -> precio == null).findAny().ifPresent(nulo -> {
-            throw new RuntimeException("Precio erróneo detectado");
-        });
     }
 
-    public void detectarErrorFindFirst() {
 
-        this.precios.stream().filter(precio -> precio == null).findFirst().ifPresent(nulo -> {
-            throw new RuntimeException("Precio erróneo detectado");
-        });
+    public boolean detectarErrorFindFirst() {
+
+        return this.precios.stream()
+                .filter(precio -> precio == null)
+                .findFirst()
+                .isPresent();
     }
 
-    public void detectarErrorAnyMatchParallel() {
+    public boolean detectarErrorAnyMatchParallel() {
 
-        if (this.precios.parallelStream().anyMatch(precio -> precio == null)) {
-
-            throw new RuntimeException("Precio erróneo detectado");
-        }
+        return this.precios.parallelStream().anyMatch(precio -> precio == null);
     }
 
-    public void detectarErrorFindAnyParallel() {
+    public boolean detectarErrorFindAnyParallel() {
 
-        this.precios.parallelStream().filter(precio -> precio == null).findAny().ifPresent(nulo -> {
-            throw new RuntimeException("Precio erróneo detectado");
-        });
+        return this.precios.parallelStream()
+                .filter(precio -> precio == null)
+                .findAny()
+                .isPresent();
     }
 
-    public void detectarErrorFindFirstParallel() {
+    public boolean detectarErrorFindFirstParallel() {
 
-        this.precios.parallelStream().filter(precio -> precio == null).findFirst().ifPresent(nulo -> {
-            throw new RuntimeException("Precio erróneo detectado");
-        });
+        return this.precios.parallelStream()
+                .filter(precio -> precio == null)
+                .findFirst()
+                .isPresent();
     }
 
 }
