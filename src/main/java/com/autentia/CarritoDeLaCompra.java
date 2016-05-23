@@ -1,8 +1,12 @@
 package com.autentia;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class CarritoDeLaCompra<T extends Long> {
+
+    private AtomicLong counter = new AtomicLong();
 
     private Collection<T> precios;
 
@@ -87,17 +91,29 @@ public class CarritoDeLaCompra<T extends Long> {
 
     public boolean detectarErrorAnyMatch() {
 
-        return this.precios.stream().anyMatch(precio -> precio == null);
+        return this.precios.stream()
+                .peek(p -> counter.incrementAndGet())
+                .anyMatch(precio -> precio == null);
     }
 
 
     //TODO Revisar nullPointerException
     public boolean detectarErrorFindAny() {
+        Optional<T> result =
+                this.precios.stream()
+                .peek(precio -> counter.incrementAndGet())
 
-        return this.precios.stream()
+
                 .filter(precio -> precio == null)
-                .findAny()
-                .isPresent();
+                .findAny();
+        System.out.println(result);
+        System.out.println(result.isPresent());
+        return result.isPresent();
+
+
+
+/*                .findAny()
+                .isPresent(); */
     }
 
     //TODO Revisar nullPointerException
@@ -115,7 +131,6 @@ public class CarritoDeLaCompra<T extends Long> {
     }
 
     public boolean detectarErrorFindAnyParallel() {
-
         return this.precios.parallelStream()
                 .filter(precio -> precio == null)
                 .findAny()
@@ -130,4 +145,11 @@ public class CarritoDeLaCompra<T extends Long> {
                 .isPresent();
     }
 
+    public long getCounter() {
+        return counter.get();
+    }
+
+    public void resetCounter() {
+        counter.set(0L);
+    }
 }

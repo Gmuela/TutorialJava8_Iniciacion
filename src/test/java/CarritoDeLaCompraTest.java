@@ -79,7 +79,9 @@ public class CarritoDeLaCompraTest {
         builder.add(null);
         builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
+        carritoDeLaCompra.resetCounter();
         Assert.assertTrue(carritoDeLaCompra.detectarErrorAnyMatch());
+        System.out.println(carritoDeLaCompra.getCounter());
 
     }
 
@@ -90,7 +92,14 @@ public class CarritoDeLaCompraTest {
         builder.add(null);
         builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindAny());
+        boolean result = false;
+        try {
+            result = carritoDeLaCompra.detectarErrorFindAny();
+            Assert.assertTrue(result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(carritoDeLaCompra.getCounter() + " elements traversed");
 
     }
 

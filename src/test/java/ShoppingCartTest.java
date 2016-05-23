@@ -66,7 +66,9 @@ public class ShoppingCartTest {
         for (int i = 0; i < UP_TO; i++) {
             try {
                 errors[i] = method.get();
-            } catch (Exception e) {}//won't happen
+            } catch (Exception e) {
+                e.printStackTrace();
+            }//won't happen
         }
         long end = System.currentTimeMillis();
         System.out.println("End----------------------");
