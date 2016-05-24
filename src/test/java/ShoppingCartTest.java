@@ -5,73 +5,112 @@ import org.junit.Test;
 
 import java.util.function.Supplier;
 
-/**
- * Created by dgomezg on 17/05/16.
- */
 public class ShoppingCartTest {
 
     public static final int UP_TO = 10_000;
-    private static CarritoDeLaCompra shoppingCart;
+    public static final long CHARGE_LEVELX2 = 1_000L;
+    private static CarritoDeLaCompra carritoCompra;
 
     @BeforeClass
     public static void setUp() {
-        CarritoBuilder builder = new CarritoBuilder(100_000L,1000000L);
-        builder.add(null);
-        builder.addMultiple(20_000L,1000000L);
-        shoppingCart = builder.build();
+        CarritoBuilder builder = new CarritoBuilder(CHARGE_LEVELX2,1000000L);
+        builder.add(-1L);
+        builder.addMultiple(CHARGE_LEVELX2,1000000L);
+        carritoCompra = builder.build();
     }
 
 
-    @Test
+    //@Test
     public void testAnyMatch() {
-        long time = testWith(() -> shoppingCart.detectarErrorAnyMatch());
-        System.out.println("anyMatch = " + time);
+
+        System.out.println("anyMatch = "
+                + testWith(() -> carritoCompra.detectarErrorAnyMatch()));
+//
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
     @Test
     public void testAnyMatchParallel() {
+
         System.out.println("anyMatchParallel = "
-                + testWith(()->shoppingCart.detectarErrorAnyMatchParallel()));
+                + testWith(()-> carritoCompra.detectarErrorAnyMatchParallel()));
+
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
-    @Test
+    //@Test
     public void testFindAny() {
+
         System.out.println("findAny = " +
-            + testWith(() -> shoppingCart.detectarErrorFindAny()));
+            + testWith(() -> carritoCompra.detectarErrorFindAny()));
+
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
     @Test
     public void testFindAnyParallel() {
+
         System.out.println("findAnyParallel = "
-            + testWith(() -> shoppingCart.detectarErrorFindAnyParallel()));
+            + testWith(() -> carritoCompra.detectarErrorFindAnyParallel()));
+
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
-    @Test
+    //@Test
     public void testFindFirst() {
+
         System.out.println("findFirst = "
-            + testWith(() -> shoppingCart.detectarErrorFindFirst()) );
+            + testWith(() -> carritoCompra.detectarErrorFindFirst()) );
+
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
-    @Test
+    //@Test
     public void testFindFirstParallel() {
+
         System.out.println("findFirstParallel = "
-            + testWith(() -> shoppingCart.detectarErrorFindFirstParallel()));
+            + testWith(() -> carritoCompra.detectarErrorFindFirstParallel()));
+
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
+//
+//        carritoCompra.resetCounter();
     }
 
     private long testWith(Supplier<Boolean> method) {
+
         Boolean []errors = new Boolean[UP_TO];
-       // System.gc();
+        System.gc();
         System.out.println("Start----------------------");
+
         long start  = System.currentTimeMillis();
+
         for (int i = 0; i < UP_TO; i++) {
             try {
                 errors[i] = method.get();
-            } catch (Exception e) {
-            }//won't happen
+            }
+            catch (Exception e) {
+                //void
+            }
         }
+
         long end = System.currentTimeMillis();
         System.out.println("End----------------------");
-        System.out.println(errors);
         return end - start;
     }
 }

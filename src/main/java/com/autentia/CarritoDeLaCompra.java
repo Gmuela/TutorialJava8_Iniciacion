@@ -76,73 +76,55 @@ public class CarritoDeLaCompra<T extends Long> {
 
     public boolean detectarError() {
 
-        boolean nullFind = false;
+        boolean negativeFind = false;
 
         for (Long precio : precios) {
 
-            if (precio == null) {
+            if (precio < 0) {
 
-                nullFind = true;
+                negativeFind = true;
             }
         }
 
-        return nullFind;
+        return negativeFind;
     }
 
     public boolean detectarErrorAnyMatch() {
 
-        return this.precios.stream()
-                .peek(p -> counter.incrementAndGet())
-                .anyMatch(precio -> precio == null);
+        return this.precios.stream().peek(precio -> counter.incrementAndGet()).anyMatch(precio -> precio.intValue() < 0);
     }
 
 
-    //TODO Revisar nullPointerException
     public boolean detectarErrorFindAny() {
-        Optional<T> result =
-                this.precios.stream()
-                .peek(precio -> counter.incrementAndGet())
 
-
-                .filter(precio -> precio == null)
-                .findAny();
-        System.out.println(result);
-        System.out.println(result.isPresent());
-        return result.isPresent();
-
-
-
-/*                .findAny()
-                .isPresent(); */
+        return this.precios.stream().filter(precio -> precio.intValue() < 0)
+                                    .findAny()
+                                    .isPresent();
     }
 
-    //TODO Revisar nullPointerException
     public boolean detectarErrorFindFirst() {
 
-        return this.precios.stream()
-                .filter(precio -> precio == null)
-                .findFirst()
-                .isPresent();
+        return this.precios.stream().filter(precio -> precio.intValue() < 0)
+                                    .findFirst()
+                                    .isPresent();
     }
 
     public boolean detectarErrorAnyMatchParallel() {
 
-        return this.precios.parallelStream().anyMatch(precio -> precio == null);
+        return this.precios.parallelStream().anyMatch(precio -> precio.intValue() < 0);
     }
 
     public boolean detectarErrorFindAnyParallel() {
-        return this.precios.parallelStream()
-                .filter(precio -> precio == null)
-                .findAny()
-                .isPresent();
+        return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
+                                            .findAny()
+                                            .isPresent();
     }
 
     public boolean detectarErrorFindFirstParallel() {
 
-        return this.precios.parallelStream()
-                .filter(precio -> precio == null)
-                .findFirst()
-                .isPresent();
+        return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
+                                            .findFirst()
+                                            .isPresent();
     }
 
     public long getCounter() {

@@ -9,14 +9,14 @@ public class CarritoDeLaCompraTest {
     private final Long NUMBER_ADD = 1000000L;
     
 
-    //@Test
+    @Test
     public void shouldReturnTheCountOfAllItems() throws Exception {
         CarritoBuilder builder = new CarritoBuilder(30L);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
         Assert.assertEquals(30, carritoDeLaCompra.contarNumeroProductos());
     }
 
-    //@Test
+    @Test
     public void shouldCalculateTotalPrice() throws Exception {
 
         CarritoBuilder builder = new CarritoBuilder(60L,5L);
@@ -25,7 +25,7 @@ public class CarritoDeLaCompraTest {
 
     }
 
-    //@Test
+    @Test
     public void shouldCalculateTotalPriceLambda() throws Exception {
 
         CarritoBuilder builder = new CarritoBuilder(60L, 5L);
@@ -34,7 +34,7 @@ public class CarritoDeLaCompraTest {
 
     }
 
-    //@Test
+    @Test
     public void shouldCalculateTotalPriceRefMethod() throws Exception {
 
         CarritoBuilder builder = new CarritoBuilder(60L,5L);
@@ -43,7 +43,7 @@ public class CarritoDeLaCompraTest {
 
     }
 
-    //@Test
+    @Test
     public void shouldCalculateTotalDiscount() throws Exception {
 
         CarritoBuilder builder = new CarritoBuilder(20L,100L);
@@ -52,7 +52,7 @@ public class CarritoDeLaCompraTest {
 
     }
 
-    //@Test
+    @Test
     public void shouldCalculateTotalDiscountLambda() throws Exception {
 
         CarritoBuilder builder = new CarritoBuilder(20L,100L);
@@ -81,8 +81,6 @@ public class CarritoDeLaCompraTest {
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
         carritoDeLaCompra.resetCounter();
         Assert.assertTrue(carritoDeLaCompra.detectarErrorAnyMatch());
-        System.out.println(carritoDeLaCompra.getCounter());
-
     }
 
     @Test
@@ -92,14 +90,7 @@ public class CarritoDeLaCompraTest {
         builder.add(-1L);
         builder.addMultiple(TOTAL_SIZE,NUMBER_ADD);
         CarritoDeLaCompra carritoDeLaCompra = builder.build();
-        boolean result = false;
-        try {
-            result = carritoDeLaCompra.detectarErrorFindAny();
-            Assert.assertTrue(result);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        System.out.println(carritoDeLaCompra.getCounter() + " elements traversed");
+        Assert.assertTrue(carritoDeLaCompra.detectarErrorFindAny());
 
     }
 
