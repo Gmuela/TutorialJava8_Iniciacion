@@ -80,6 +80,8 @@ public class CarritoDeLaCompra<T extends Long> {
 
         for (Long precio : precios) {
 
+            this.counter.incrementAndGet();
+
             if (precio < 0) {
 
                 negativeFind = true;
@@ -91,13 +93,16 @@ public class CarritoDeLaCompra<T extends Long> {
 
     public boolean detectarErrorAnyMatch() {
 
-        return this.precios.stream().peek(precio -> counter.incrementAndGet()).anyMatch(precio -> precio.intValue() < 0);
+        return this.precios.stream()
+                           .peek(precio -> counter.incrementAndGet())
+                           .anyMatch(precio -> precio.intValue() < 0);
     }
 
 
     public boolean detectarErrorFindAny() {
 
         return this.precios.stream().filter(precio -> precio.intValue() < 0)
+                                    .peek(precio -> counter.incrementAndGet())
                                     .findAny()
                                     .isPresent();
     }
@@ -105,17 +110,21 @@ public class CarritoDeLaCompra<T extends Long> {
     public boolean detectarErrorFindFirst() {
 
         return this.precios.stream().filter(precio -> precio.intValue() < 0)
+                                    .peek(precio -> counter.incrementAndGet())
                                     .findFirst()
                                     .isPresent();
     }
 
     public boolean detectarErrorAnyMatchParallel() {
 
-        return this.precios.parallelStream().anyMatch(precio -> precio.intValue() < 0);
+        return this.precios.parallelStream()
+                           .peek(precio -> counter.incrementAndGet())
+                           .anyMatch(precio -> precio.intValue() < 0);
     }
 
     public boolean detectarErrorFindAnyParallel() {
         return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
+                                            .peek(precio -> counter.incrementAndGet())
                                             .findAny()
                                             .isPresent();
     }
@@ -123,6 +132,7 @@ public class CarritoDeLaCompra<T extends Long> {
     public boolean detectarErrorFindFirstParallel() {
 
         return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
+                                            .peek(precio -> counter.incrementAndGet())
                                             .findFirst()
                                             .isPresent();
     }
