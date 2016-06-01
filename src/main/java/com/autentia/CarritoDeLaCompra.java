@@ -101,38 +101,37 @@ public class CarritoDeLaCompra<T extends Long> {
 
     public boolean detectarErrorFindAny() {
 
-        return this.precios.stream().filter(precio -> precio.intValue() < 0)
-                                    .peek(precio -> counter.incrementAndGet())
+        return this.precios.stream().peek(precio -> counter.incrementAndGet())
+                                    .filter(precio -> precio.intValue() < 0)
                                     .findAny()
                                     .isPresent();
     }
 
     public boolean detectarErrorFindFirst() {
 
-        return this.precios.stream().filter(precio -> precio.intValue() < 0)
-                                    .peek(precio -> counter.incrementAndGet())
+        return this.precios.stream().peek(precio -> counter.incrementAndGet())
+                                    .filter(precio -> precio.intValue() < 0)
                                     .findFirst()
                                     .isPresent();
     }
 
     public boolean detectarErrorAnyMatchParallel() {
 
-        return this.precios.parallelStream()
-                           .peek(precio -> counter.incrementAndGet())
-                           .anyMatch(precio -> precio.intValue() < 0);
+        return this.precios.parallelStream().peek(precio -> counter.incrementAndGet())
+                                            .anyMatch(precio -> precio.intValue() < 0);
     }
 
     public boolean detectarErrorFindAnyParallel() {
-        return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
-                                            .peek(precio -> counter.incrementAndGet())
+        return this.precios.parallelStream().peek(precio -> counter.incrementAndGet())
+                                            .filter(precio -> precio.intValue() < 0)
                                             .findAny()
                                             .isPresent();
     }
 
     public boolean detectarErrorFindFirstParallel() {
 
-        return this.precios.parallelStream().filter(precio -> precio.intValue() < 0)
-                                            .peek(precio -> counter.incrementAndGet())
+        return this.precios.parallelStream().peek(precio -> counter.incrementAndGet())
+                                            .filter(precio -> precio.intValue() < 0)
                                             .findFirst()
                                             .isPresent();
     }

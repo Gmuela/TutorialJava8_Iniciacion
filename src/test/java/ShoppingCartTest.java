@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 
 public class ShoppingCartTest {
 
-    public static final int UP_TO = 10_000;
-    public static final Long LOAD_LEVELX2 = 1L;
+    public static final int UP_TO = 1;
+    public static final Long LOAD_LEVELX2 = 100_000L;
     private static CarritoDeLaCompra carritoCompra;
 
     @BeforeClass
@@ -22,101 +22,93 @@ public class ShoppingCartTest {
     @Test
     public void testImperative(){
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
         System.out.println("imperative = "
                 + testWith(() -> carritoCompra.detectarError()));
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones imperative = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones imperative = " + counter);
     }
 
     @Test
     public void testAnyMatch() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
         System.out.println("anyMatch = "
                 + testWith(() -> carritoCompra.detectarErrorAnyMatch()));
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones anyMatch = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatch = " + counter);
 
     }
 
     @Test
     public void testAnyMatchParallel() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
         System.out.println("anyMatchParallel = "
                 + testWith(()-> carritoCompra.detectarErrorAnyMatchParallel()));
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones anyMatchParallel = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones anyMatchParallel = " + counter);
 
     }
 
     @Test
     public void testFindAny() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
 
         System.out.println("findAny = " +
             + testWith(() -> carritoCompra.detectarErrorFindAny()));
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones findAny = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones findAny = " + counter);
     }
 
     @Test
     public void testFindAnyParallel() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
 
         System.out.println("findAnyParallel = "
             + testWith(() -> carritoCompra.detectarErrorFindAnyParallel()));
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones findAnyParallel = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones findAnyParallel = " + counter);
     }
 
     @Test
     public void testFindFirst() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
         System.out.println("findFirst = "
             + testWith(() -> carritoCompra.detectarErrorFindFirst()) );
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones findFirst = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones findFirst = " + counter);
 
     }
 
     @Test
     public void testFindFirstParallel() {
 
-        carritoCompra.resetCounter();
+//        carritoCompra.resetCounter();
         System.out.println("findFirstParallel = "
             + testWith(() -> carritoCompra.detectarErrorFindFirstParallel()));
 
-        long counter = carritoCompra.getCounter();
-        System.out.print("Iteraciones findFirstParallel = " + counter);
+//        long counter = carritoCompra.getCounter();
+//        System.out.print("Iteraciones findFirstParallel = " + counter);
 
     }
 
     private long testWith(Supplier<Boolean> method) {
 
-        Boolean []errors = new Boolean[UP_TO];
         System.gc();
         System.out.println("Start----------------------");
 
         long start  = System.currentTimeMillis();
 
-        for (int i = 0; i < UP_TO; i++) {
-            try {
-                errors[i] = method.get();
-            }
-            catch (Exception e) {
-                //void
-            }
-        }
+        method.get();
 
         long end = System.currentTimeMillis();
         System.out.println("End----------------------");
